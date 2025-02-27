@@ -1,9 +1,7 @@
 'use client';
 
 import { useFormStatus } from 'react-dom';
-
-import { LoaderIcon } from '@/components/icons';
-
+import { MatrixLoading } from './matrix-loading';
 import { Button } from './ui/button';
 
 export function SubmitButton({
@@ -20,13 +18,13 @@ export function SubmitButton({
       type={pending ? 'button' : 'submit'}
       aria-disabled={pending || isSuccessful}
       disabled={pending || isSuccessful}
-      className="relative"
+      className="relative bg-green-600 hover:bg-green-700 text-black font-bold mt-2"
     >
       {children}
 
       {(pending || isSuccessful) && (
-        <span className="animate-spin absolute right-4">
-          <LoaderIcon />
+        <span className="absolute right-4">
+          <MatrixLoading />
         </span>
       )}
 

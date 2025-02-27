@@ -21,12 +21,14 @@ export function SidebarToggle({
         <Button
           onClick={toggleSidebar}
           variant="outline"
-          className="md:px-2 md:h-fit"
+          className="md:px-2 md:h-fit border-green-500/50 text-green-400 hover:bg-green-900/20 hover:text-green-300"
         >
           <SidebarLeftIcon size={16} />
         </Button>
       </TooltipTrigger>
-      <TooltipContent align="start">Toggle Sidebar</TooltipContent>
+      <TooltipContent align="start" className="bg-black border-green-500/30 text-green-400">
+        Toggle Sidebar
+      </TooltipContent>
     </Tooltip>
   );
 }

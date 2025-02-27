@@ -1,0 +1,18 @@
+# Required for authentication
+# Generate a random secret: `openssl rand -base64 32`
+AUTH_SECRET=
+
+# Required for OpenAI API
+OPENAI_API_KEY=
+
+# Optional for X.AI (Grok) API
+XAI_API_KEY=
+
+# Required for database
+DATABASE_URL=
+
+# Required for blob storage
+BLOB_READ_WRITE_TOKEN=
+
+# Optional for Fireworks AI
+FIREWORKS_API_KEY=

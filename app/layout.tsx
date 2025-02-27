@@ -2,21 +2,22 @@ import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
 import { ThemeProvider } from '@/components/theme-provider';
+import { GlobalMatrixBackground } from '@/components/global-matrix-background';
+import { CustomFavicon } from '@/components/custom-favicon';
 
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.vercel.ai'),
-  title: 'Next.js Chatbot Template',
-  description: 'Next.js chatbot template using the AI SDK.',
+  metadataBase: new URL('https://chat.aiangkor.com'),
+  title: 'AI Angkor Intelligence Chatbot',
+  description: 'Advanced AI chatbot by AI Angkor Intelligence.',
 };
 
 export const viewport = {
   maximumScale: 1, // Disable auto-zoom on mobile Safari
 };
 
-const LIGHT_THEME_COLOR = 'hsl(0 0% 100%)';
-const DARK_THEME_COLOR = 'hsl(240deg 10% 3.92%)';
+const THEME_COLOR = 'hsl(0 0% 0%)'; // Black theme color
 const THEME_COLOR_SCRIPT = `\
 (function() {
   var html = document.documentElement;
@@ -26,13 +27,7 @@ const THEME_COLOR_SCRIPT = `\
     meta.setAttribute('name', 'theme-color');
     document.head.appendChild(meta);
   }
-  function updateThemeColor() {
-    var isDark = html.classList.contains('dark');
-    meta.setAttribute('content', isDark ? '${DARK_THEME_COLOR}' : '${LIGHT_THEME_COLOR}');
-  }
-  var observer = new MutationObserver(updateThemeColor);
-  observer.observe(html, { attributes: true, attributeFilter: ['class'] });
-  updateThemeColor();
+  meta.setAttribute('content', '${THEME_COLOR}');
 })();`;
 
 export default async function RootLayout({
@@ -43,6 +38,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
+      className="dark"
       // `next-themes` injects an extra classname to the body element to avoid
       // visual flicker before hydration. Hence the `suppressHydrationWarning`
       // prop is necessary to avoid the React hydration mismatch warning.
@@ -56,13 +52,15 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased bg-black text-white">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
+          <CustomFavicon />
+          <GlobalMatrixBackground />
           <Toaster position="top-center" />
           {children}
         </ThemeProvider>

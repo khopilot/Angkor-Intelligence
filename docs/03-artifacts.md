@@ -1,6 +1,67 @@
 # Artifacts
 
-Artifacts is a special user interface mode that allows you to have a workspace like interface along with the chat interface. This is similar to [ChatGPT's Canvas](https://openai.com/index/introducing-canvas) and [Claude's Artifacts](https://www.anthropic.com/news/artifacts).
+The AI Angkor Intelligence chatbot includes a powerful artifacts feature that allows the AI to create and manipulate various types of content during conversations. This document explains how to use and extend the artifacts functionality.
+
+## What are Artifacts?
+
+Artifacts are structured content objects that the AI can generate during a conversation. These include:
+
+- Documents (text files)
+- Spreadsheets
+- Code snippets
+- Visualizations
+- And more
+
+## Using Artifacts
+
+The artifacts panel is accessible from the chat interface. When the AI generates an artifact, it will appear in this panel, allowing you to:
+
+1. View the artifact
+2. Edit the artifact
+3. Download the artifact
+4. Share the artifact
+
+## How Artifacts Work
+
+The AI Angkor Intelligence platform uses a specialized system to generate and manage artifacts:
+
+1. The AI identifies when an artifact should be created based on the conversation
+2. It generates the appropriate content using specialized models
+3. The artifact is stored in the database and linked to the conversation
+4. The UI displays the artifact in the artifacts panel
+
+## Extending Artifacts
+
+Developers can extend the artifacts functionality by adding new artifact types:
+
+1. Create a new artifact type in the `lib/ai/tools` directory
+2. Register the tool in the chat API route
+3. Update the UI to display the new artifact type
+
+Example of creating a new artifact tool:
+
+```typescript
+// lib/ai/tools/create-custom-artifact.ts
+import { createTool } from 'ai';
+
+export const createCustomArtifact = createTool({
+  description: 'Create a custom artifact',
+  schema: {
+    type: 'object',
+    properties: {
+      title: { type: 'string' },
+      content: { type: 'string' },
+    },
+    required: ['title', 'content'],
+  },
+  execute: async ({ title, content }) => {
+    // Implementation to create and store the artifact
+    return { success: true, artifactId: 'new-artifact-id' };
+  },
+});
+```
+
+For more information on extending artifacts, contact the AI Angkor Intelligence development team.
 
 The template already ships with the following artifacts:
 

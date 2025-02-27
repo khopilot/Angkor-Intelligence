@@ -35,16 +35,22 @@ export function ModelSelector({
       <DropdownMenuTrigger
         asChild
         className={cn(
-          'w-fit data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
+          'w-fit data-[state=open]:bg-green-900/30 data-[state=open]:text-green-300',
           className,
         )}
       >
-        <Button variant="outline" className="md:px-2 md:h-[34px]">
+        <Button 
+          variant="outline" 
+          className="md:px-2 md:h-[34px] border-green-500/50 text-green-400 hover:bg-green-900/20 hover:text-green-300"
+        >
           {selectedChatModel?.name}
           <ChevronDownIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="min-w-[300px]">
+      <DropdownMenuContent 
+        align="start" 
+        className="min-w-[300px] bg-black border border-green-500/30"
+      >
         {chatModels.map((chatModel) => {
           const { id } = chatModel;
 
@@ -59,17 +65,17 @@ export function ModelSelector({
                   saveChatModelAsCookie(id);
                 });
               }}
-              className="gap-4 group/item flex flex-row justify-between items-center"
+              className="gap-4 group/item flex flex-row justify-between items-center hover:bg-green-900/20 hover:text-green-300"
               data-active={id === optimisticModelId}
             >
               <div className="flex flex-col gap-1 items-start">
-                <div>{chatModel.name}</div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-green-400">{chatModel.name}</div>
+                <div className="text-xs text-green-300/70">
                   {chatModel.description}
                 </div>
               </div>
 
-              <div className="text-foreground dark:text-foreground opacity-0 group-data-[active=true]/item:opacity-100">
+              <div className="text-green-500 opacity-0 group-data-[active=true]/item:opacity-100">
                 <CheckCircleFillIcon />
               </div>
             </DropdownMenuItem>

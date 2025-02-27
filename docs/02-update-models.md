@@ -1,53 +1,75 @@
-# Update Models
+# Updating Models
 
-The chatbot template ships with [OpenAI](https://sdk.vercel.ai/providers/ai-sdk-providers/openai) as the default model provider. Since the template is powered by the [AI SDK](https://sdk.vercel.ai), which supports [multiple providers](https://sdk.vercel.ai/providers/ai-sdk-providers) out of the box, you can easily switch to another provider of your choice.
+The AI Angkor Intelligence chatbot supports multiple AI models. This guide explains how to update or add new models to the platform.
 
-To update the models, you will need to update the custom provider called `myProvider` at `/lib/ai/models.ts` shown below.
+## Available Models
 
-```ts
-import { customProvider } from "ai";
-import { openai } from "@ai-sdk/openai";
+The chatbot currently supports the following models:
 
-export const myProvider = customProvider({
-  languageModels: {
-    "chat-model-small": openai("gpt-4o-mini"),
-    "chat-model-large": openai("gpt-4o"),
-    "chat-model-reasoning": wrapLanguageModel({
-      model: fireworks("accounts/fireworks/models/deepseek-r1"),
-      middleware: extractReasoningMiddleware({ tagName: "think" }),
-    }),
-    "title-model": openai("gpt-4-turbo"),
-    "artifact-model": openai("gpt-4o-mini"),
-  },
-  imageModels: {
-    "small-model": openai.image("dall-e-3"),
-  },
-});
-```
+- Small model (GPT-4o-mini): Fast and efficient for lightweight tasks
+- Large model (GPT-4o): More powerful for complex, multi-step tasks
+- Reasoning model (DeepSeek): Specialized for advanced reasoning tasks
+- Grok model (coming soon): X.AI's Grok model (currently using fallback)
 
-You can replace the `openai` models with any other provider of your choice. You will need to install the provider library and switch the models accordingly.
+## Adding or Updating Models
 
-For example, if you want to use Anthropic's `claude-3-5-sonnet` model for `chat-model-large`, you can replace the `openai` model with the `anthropic` model as shown below.
+To add or update models, you'll need to modify the `lib/ai/models.ts` file:
 
-```ts
-import { customProvider } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
+```typescript
+// lib/ai/models.ts
+import { openai } from '@ai-sdk/openai';
+import { fireworks } from '@ai-sdk/fireworks';
+import { customProvider } from 'ai';
 
 export const myProvider = customProvider({
   languageModels: {
-    "chat-model-small": openai("gpt-4o-mini"),
-    "chat-model-large": anthropic("claude-3-5-sonnet"), // Replace openai with anthropic
-    "chat-model-reasoning": wrapLanguageModel({
-      model: fireworks("accounts/fireworks/models/deepseek-r1"),
-      middleware: extractReasoningMiddleware({ tagName: "think" }),
-    }),
-    "title-model": openai("gpt-4-turbo"),
-    "artifact-model": openai("gpt-4o-mini"),
+    'chat-model-small': openai('gpt-4o-mini'),
+    'chat-model-large': openai('gpt-4o'),
+    // Add your new model here
+    'chat-model-new': openai('your-new-model'),
   },
-  imageModels: {
-    "small-model": openai.image("dall-e-3"),
-  },
+  // ...
 });
+
+export const chatModels = [
+  // ...
+  // Add your new model to the UI
+  {
+    id: 'chat-model-new',
+    name: 'New Model',
+    description: 'Description of your new model',
+  },
+];
 ```
 
-You can find the provider library and model names in the [provider](https://sdk.vercel.ai/providers/ai-sdk-providers)'s documentation. Once you have updated the models, you should be able to use the new models in your chatbot.
+## Using Different Model Providers
+
+The AI Angkor Intelligence platform is designed to work with multiple AI providers. To add a new provider:
+
+1. Install the required package:
+   ```bash
+   pnpm add @ai-sdk/your-provider
+   ```
+
+2. Import and use the provider in `models.ts`:
+   ```typescript
+   import { yourProvider } from '@ai-sdk/your-provider';
+   
+   export const myProvider = customProvider({
+     languageModels: {
+       'chat-model-custom': yourProvider('model-name'),
+       // ...
+     },
+   });
+   ```
+
+## Testing New Models
+
+After adding a new model, test it thoroughly to ensure it works as expected with the AI Angkor Intelligence platform. Pay attention to:
+
+- Response quality
+- Response time
+- Cost implications
+- Compatibility with existing features
+
+For assistance with integrating new models, contact the AI Angkor Intelligence support team.

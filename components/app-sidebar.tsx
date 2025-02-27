@@ -17,14 +17,15 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { AngkorLogo } from './angkor-logo';
 
 export function AppSidebar({ user }: { user: User | undefined }) {
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
 
   return (
-    <Sidebar className="group-data-[side=left]:border-r-0">
-      <SidebarHeader>
+    <Sidebar className="group-data-[side=left]:border-r-0 bg-black border-r border-green-500/30">
+      <SidebarHeader className="border-b border-green-500/30">
         <SidebarMenu>
           <div className="flex flex-row justify-between items-center">
             <Link
@@ -34,8 +35,9 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               }}
               className="flex flex-row gap-3 items-center"
             >
-              <span className="text-lg font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
-                Chatbot
+              <AngkorLogo size={28} />
+              <span className="text-lg font-semibold px-2 text-green-400 hover:bg-green-900/20 rounded-md cursor-pointer">
+                AI Angkor Intelligence
               </span>
             </Link>
             <Tooltip>
@@ -43,7 +45,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                 <Button
                   variant="ghost"
                   type="button"
-                  className="p-2 h-fit"
+                  className="p-2 h-fit text-green-400 hover:bg-green-900/20 hover:text-green-300"
                   onClick={() => {
                     setOpenMobile(false);
                     router.push('/');
@@ -53,7 +55,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                   <PlusIcon />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent align="end">New Chat</TooltipContent>
+              <TooltipContent align="end" className="bg-black border-green-500/30 text-green-400">New Chat</TooltipContent>
             </Tooltip>
           </div>
         </SidebarMenu>
@@ -61,7 +63,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
       <SidebarContent>
         <SidebarHistory user={user} />
       </SidebarContent>
-      <SidebarFooter>{user && <SidebarUserNav user={user} />}</SidebarFooter>
+      <SidebarFooter className="border-t border-green-500/30">{user && <SidebarUserNav user={user} />}</SidebarFooter>
     </Sidebar>
   );
 }

@@ -7,6 +7,7 @@ import {
 
 import { auth } from '@/app/(auth)/auth';
 import { myProvider } from '@/lib/ai/models';
+import { getGrokFallbackModel } from '@/lib/ai/grok-provider';
 import { systemPrompt } from '@/lib/ai/prompts';
 import {
   deleteChatById,
@@ -61,9 +62,16 @@ export async function POST(request: Request) {
 
   return createDataStreamResponse({
     execute: (dataStream) => {
+      // Handle Grok model by using fallback
+      let modelToUse = selectedChatModel;
+      if (selectedChatModel === 'chat-model-grok') {
+        modelToUse = getGrokFallbackModel(selectedChatModel);
+        console.log(`Using fallback model ${modelToUse} for Grok`);
+      }
+
       const result = streamText({
-        model: myProvider.languageModel(selectedChatModel),
-        system: systemPrompt({ selectedChatModel }),
+        model: myProvider.languageModel(modelToUse),
+        system: systemPrompt({ selectedChatModel: modelToUse }),
         messages,
         maxSteps: 5,
         experimental_activeTools:
