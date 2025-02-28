@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 
 const APP_NAME = 'AI Angkor Intelligence';
 const APP_DEFAULT_TITLE = 'AI Angkor Intelligence Chatbot';
@@ -23,7 +23,6 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  themeColor: '#000000',
   manifest: '/manifest.json',
   icons: {
     icon: '/images/XtefoH71irGOB6ad-generated_image.jpg',
@@ -53,11 +52,6 @@ export const metadata: Metadata = {
     creator: '@aiangkor',
     site: '@aiangkor',
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
   robots: {
     index: true,
     follow: true,
@@ -68,4 +62,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#000000',
 }; 

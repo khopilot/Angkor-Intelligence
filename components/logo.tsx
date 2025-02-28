@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface LogoProps {
   size?: number;
@@ -10,8 +9,8 @@ interface LogoProps {
 
 export function Logo({ size = 40, className = '' }: LogoProps) {
   return (
-    <Link href="/" className={`flex items-center ${className}`}>
-      <div className="relative" style={{ width: size, height: size }}>
+    <div className={`relative ${className}`}>
+      <div style={{ width: size, height: size }}>
         <Image
           src="/images/XtefoH71irGOB6ad-generated_image.jpg"
           alt="AI Angkor Intelligence Logo"
@@ -21,6 +20,6 @@ export function Logo({ size = 40, className = '' }: LogoProps) {
           priority
         />
       </div>
-    </Link>
+    </div>
   );
 } 

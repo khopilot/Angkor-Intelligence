@@ -23,23 +23,25 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
 
+  const handleLogoClick = () => {
+    setOpenMobile(false);
+    router.push('/');
+  };
+
   return (
     <Sidebar className="group-data-[side=left]:border-r-0 bg-black border-r border-green-500/30">
       <SidebarHeader className="border-b border-green-500/30">
         <SidebarMenu>
           <div className="flex flex-row justify-between items-center">
-            <Link
-              href="/"
-              onClick={() => {
-                setOpenMobile(false);
-              }}
-              className="flex flex-row gap-3 items-center"
+            <div 
+              className="flex flex-row gap-3 items-center cursor-pointer"
+              onClick={handleLogoClick}
             >
               <Logo size={32} />
-              <span className="text-lg font-semibold px-2 text-green-400 hover:bg-green-900/20 rounded-md cursor-pointer">
+              <span className="text-lg font-semibold px-2 text-green-400 hover:bg-green-900/20 rounded-md">
                 AI Angkor Intelligence
               </span>
-            </Link>
+            </div>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button

@@ -3,15 +3,11 @@ import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/theme-provider';
 import { GlobalMatrixBackground } from '@/components/global-matrix-background';
 import { CustomFavicon } from '@/components/custom-favicon';
-import { metadata } from './metadata';
+import { metadata, viewport } from './metadata';
 
 import './globals.css';
 
-export { metadata };
-
-export const viewport = {
-  maximumScale: 1, // Disable auto-zoom on mobile Safari
-};
+export { metadata, viewport };
 
 // Force dark mode script
 const FORCE_DARK_MODE_SCRIPT = `
@@ -51,19 +47,7 @@ export default async function RootLayout({
       suppressHydrationWarning
       data-force-theme="dark" // Additional attribute to force dark theme
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: THEME_COLOR_SCRIPT,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: FORCE_DARK_MODE_SCRIPT,
-          }}
-        />
-        <meta name="color-scheme" content="dark" /> {/* Force dark color scheme */}
-      </head>
+      <head><script dangerouslySetInnerHTML={{__html: THEME_COLOR_SCRIPT}}/><script dangerouslySetInnerHTML={{__html: FORCE_DARK_MODE_SCRIPT}}/><meta name="color-scheme" content="dark"/></head>
       <body className="antialiased bg-black text-white dark">
         <ThemeProvider
           attribute="class"

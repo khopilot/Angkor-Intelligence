@@ -25,6 +25,9 @@ export default function Page() {
   );
 
   useEffect(() => {
+    // Check if state exists and has a status property
+    if (!state || typeof state.status === 'undefined') return;
+    
     if (state.status === 'user_exists') {
       toast.error('Account already exists');
     } else if (state.status === 'failed') {
