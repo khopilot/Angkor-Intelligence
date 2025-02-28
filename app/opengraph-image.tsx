@@ -104,6 +104,27 @@ export default async function Image() {
     );
   } catch (e) {
     console.log(`Error generating OpenGraph image: ${e}`);
-    return new Response('Failed to generate OpenGraph image', { status: 500 });
+    // Return a simple fallback image
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            fontSize: 64,
+            background: 'black',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#10B981',
+          }}
+        >
+          AI Angkor Intelligence
+        </div>
+      ),
+      {
+        ...size,
+      },
+    );
   }
 } 

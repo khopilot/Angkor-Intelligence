@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: APP_NAME,
     images: [
       {
-        url: 'https://angkor-intelligence.vercel.app/og-image.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'AI Angkor Intelligence Logo',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: APP_DEFAULT_TITLE,
     description: APP_DESCRIPTION,
-    images: ['https://angkor-intelligence.vercel.app/twitter-image.jpg'],
+    images: ['/twitter-image.jpg'],
     creator: '@aiangkor',
     site: '@aiangkor',
   },

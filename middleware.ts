@@ -11,7 +11,7 @@ export const config = {
     '/api/:path*', 
     '/login', 
     '/register',
-    // Exclude image files and manifest from authentication
-    '/((?!images|.*\\.jpg$|.*\\.png$|.*\\.jpeg$|.*\\.gif$|.*\\.webp$|manifest\\.json).*)',
+    // Exclude image files, manifest, and other public assets from authentication
+    '/((?!_next|images|.*\\.jpg$|.*\\.png$|.*\\.jpeg$|.*\\.gif$|.*\\.webp$|.*\\.svg$|.*\\.ico$|manifest\\.json|favicon\\.ico).*)',
   ],
 };
