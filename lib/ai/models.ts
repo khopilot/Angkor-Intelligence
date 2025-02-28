@@ -42,23 +42,23 @@ interface ChatModel {
 export const chatModels: Array<ChatModel> = [
   {
     id: 'chat-model-small',
-    name: 'Small model',
-    description: 'Small model for fast, lightweight tasks',
+    name: 'Apsara Model',
+    description: 'Swift and graceful like the celestial dancers of Angkor',
   },
   {
     id: 'chat-model-large',
-    name: 'Large model',
-    description: 'Large model for complex, multi-step tasks',
+    name: 'Bayon Model',
+    description: 'Powerful and detailed like the many faces of Bayon Temple',
   },
   {
     id: 'chat-model-reasoning',
-    name: 'Reasoning model',
-    description: 'Uses advanced reasoning',
+    name: 'Preah Vihear Model',
+    description: 'Elevated wisdom from the mountain temple of knowledge',
   },
   // Grok model kept in UI but will use OpenAI as fallback until integration is complete
   {
     id: 'chat-model-grok',
-    name: 'Grok model (using fallback)',
-    description: 'Currently using GPT-4o as fallback until Grok integration is complete',
+    name: 'Tonlé Sap Model',
+    description: 'Adaptable intelligence that flows with changing conditions',
   },
 ];
