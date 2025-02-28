@@ -1,35 +1,13 @@
-import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
 import { ThemeProvider } from '@/components/theme-provider';
 import { GlobalMatrixBackground } from '@/components/global-matrix-background';
 import { CustomFavicon } from '@/components/custom-favicon';
+import { metadata } from './metadata';
 
 import './globals.css';
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.aiangkor.com'),
-  title: 'AI Angkor Intelligence Chatbot',
-  description: 'Advanced AI chatbot by AI Angkor Intelligence.',
-  themeColor: '#000000', // Ensure black theme color in metadata
-  manifest: '/manifest.json',
-  icons: {
-    icon: '/images/XtefoH71irGOB6ad-generated_image.jpg',
-    apple: '/images/XtefoH71irGOB6ad-generated_image.jpg',
-  },
-  openGraph: {
-    title: 'AI Angkor Intelligence Chatbot',
-    description: 'Advanced AI chatbot by AI Angkor Intelligence.',
-    images: ['/opengraph-image.jpg'],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'AI Angkor Intelligence Chatbot',
-    description: 'Advanced AI chatbot by AI Angkor Intelligence.',
-    images: ['/twitter-image.jpg'],
-  },
-};
+export { metadata };
 
 export const viewport = {
   maximumScale: 1, // Disable auto-zoom on mobile Safari
