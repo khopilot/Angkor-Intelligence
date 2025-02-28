@@ -3,7 +3,6 @@ import { ChevronUp } from 'lucide-react';
 import Image from 'next/image';
 import type { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import { useTheme } from 'next-themes';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 import {
@@ -20,8 +19,6 @@ import {
 } from '@/components/ui/sidebar';
 
 export function SidebarUserNav({ user }: { user: User }) {
-  const { setTheme, theme } = useTheme();
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -45,11 +42,8 @@ export function SidebarUserNav({ user }: { user: User }) {
             side="top"
             className="w-[--radix-popper-anchor-width]"
           >
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onSelect={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-              {`Toggle ${theme === 'light' ? 'dark' : 'light'} mode`}
+            <DropdownMenuItem className="cursor-default text-green-400">
+              Dark Mode Enabled
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>

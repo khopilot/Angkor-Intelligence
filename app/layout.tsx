@@ -11,11 +11,21 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://chat.aiangkor.com'),
   title: 'AI Angkor Intelligence Chatbot',
   description: 'Advanced AI chatbot by AI Angkor Intelligence.',
+  themeColor: '#000000', // Ensure black theme color in metadata
 };
 
 export const viewport = {
   maximumScale: 1, // Disable auto-zoom on mobile Safari
 };
+
+// Force dark mode script
+const FORCE_DARK_MODE_SCRIPT = `
+(function() {
+  document.documentElement.classList.add('dark');
+  document.documentElement.classList.remove('light');
+  localStorage.setItem('theme', 'dark');
+})();
+`;
 
 const THEME_COLOR = 'hsl(0 0% 0%)'; // Black theme color
 const THEME_COLOR_SCRIPT = `\
@@ -44,6 +54,7 @@ export default async function RootLayout({
       // prop is necessary to avoid the React hydration mismatch warning.
       // https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
       suppressHydrationWarning
+      data-force-theme="dark" // Additional attribute to force dark theme
     >
       <head>
         <script
@@ -51,17 +62,24 @@ export default async function RootLayout({
             __html: THEME_COLOR_SCRIPT,
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: FORCE_DARK_MODE_SCRIPT,
+          }}
+        />
+        <meta name="color-scheme" content="dark" /> {/* Force dark color scheme */}
       </head>
-      <body className="antialiased bg-black text-white">
+      <body className="antialiased bg-black text-white dark">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
+          forcedTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
           <CustomFavicon />
           <GlobalMatrixBackground />
-          <Toaster position="top-center" />
+          <Toaster position="top-center" toastOptions={{ style: { background: '#000', color: '#fff', border: '1px solid rgba(16, 185, 129, 0.3)' } }} />
           {children}
         </ThemeProvider>
       </body>
