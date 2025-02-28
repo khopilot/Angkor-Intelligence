@@ -8,7 +8,6 @@ import { metadata, viewport } from './metadata';
 
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { fontSans } from '@/styles/fonts';
 
 export { metadata, viewport };
 
@@ -63,7 +62,7 @@ export default async function RootLayout({
         <meta property="og:url" content="https://angkor-intelligence.vercel.app" />
         <meta property="og:type" content="website" />
       </head>
-      <body className={cn('min-h-screen font-sans antialiased', fontSans.variable)}>
+      <body className="min-h-screen antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
