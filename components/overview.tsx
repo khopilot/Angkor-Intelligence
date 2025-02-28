@@ -23,10 +23,6 @@ export const Overview = () => {
           system is designed to provide intelligent responses and assist with a wide range of tasks.
         </p>
         <p>
-          Our platform supports multiple AI models, document creation, and seamless file processing 
-          to enhance your productivity and provide valuable insights.
-        </p>
-        <p>
           Start a conversation by typing a message below, or explore the various features 
           available in the sidebar.
         </p>
