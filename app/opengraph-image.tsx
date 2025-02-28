@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { NextRequest } from 'next/server';
 
 // Route segment config
 export const runtime = 'edge';
@@ -13,7 +14,7 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-export default async function Image() {
+export default async function Image(request: NextRequest) {
   try {
     // Font
     const interSemiBold = fetch(
