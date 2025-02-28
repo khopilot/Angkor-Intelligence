@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { AngkorLogo } from './angkor-logo';
 import { useEffect, useState } from 'react';
+import { Logo } from './logo';
 
 export function WelcomeMessage() {
   const [isMounted, setIsMounted] = useState(false);
@@ -40,7 +40,7 @@ export function WelcomeMessage() {
     >
       <div className="rounded-xl p-6 flex flex-col gap-6 bg-black/50 backdrop-blur-md border border-green-500/30 shadow-lg">
         <div className="flex items-center justify-center gap-4">
-          <AngkorLogo size={48} />
+          <Logo size={60} />
           <h1 className="text-3xl font-bold text-green-400">AI Angkor Intelligence</h1>
         </div>
         

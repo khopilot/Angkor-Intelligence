@@ -12,6 +12,23 @@ export const metadata: Metadata = {
   title: 'AI Angkor Intelligence Chatbot',
   description: 'Advanced AI chatbot by AI Angkor Intelligence.',
   themeColor: '#000000', // Ensure black theme color in metadata
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/images/XtefoH71irGOB6ad-generated_image.jpg',
+    apple: '/images/XtefoH71irGOB6ad-generated_image.jpg',
+  },
+  openGraph: {
+    title: 'AI Angkor Intelligence Chatbot',
+    description: 'Advanced AI chatbot by AI Angkor Intelligence.',
+    images: ['/opengraph-image.jpg'],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI Angkor Intelligence Chatbot',
+    description: 'Advanced AI chatbot by AI Angkor Intelligence.',
+    images: ['/twitter-image.jpg'],
+  },
 };
 
 export const viewport = {
