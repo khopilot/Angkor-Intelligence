@@ -6,12 +6,7 @@ export default NextAuth(authConfig).auth;
 
 export const config = {
   matcher: [
-    '/', 
-    '/:id', 
-    '/api/:path*', 
-    '/login', 
-    '/register',
-    // Exclude image files, manifest, and other public assets from authentication
-    '/((?!_next|images|.*\\.jpg$|.*\\.png$|.*\\.jpeg$|.*\\.gif$|.*\\.webp$|.*\\.svg$|.*\\.ico$|manifest\\.json|favicon\\.ico).*)',
+    // Include routes that should be protected
+    '/((?!_next/static|_next/image|favicon.ico|opengraph-image|twitter-image|og-image.jpg|twitter-image.jpg|images|.*\\.jpg$|.*\\.png$|.*\\.jpeg$|.*\\.gif$|.*\\.webp$|.*\\.svg$|.*\\.ico$|manifest\\.json).*)',
   ],
 };
