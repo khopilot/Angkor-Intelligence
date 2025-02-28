@@ -1,4 +1,5 @@
 import { Toaster } from 'sonner';
+import { Analytics } from '@vercel/analytics/react';
 
 import { ThemeProvider } from '@/components/theme-provider';
 import { GlobalMatrixBackground } from '@/components/global-matrix-background';
@@ -60,6 +61,7 @@ export default async function RootLayout({
           <GlobalMatrixBackground />
           <Toaster position="top-center" toastOptions={{ style: { background: '#000', color: '#fff', border: '1px solid rgba(16, 185, 129, 0.3)' } }} />
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
