@@ -29,6 +29,18 @@ import { getWeather } from '@/lib/ai/tools/get-weather';
 
 export const maxDuration = 60;
 
+// Function to check if a message is a weather query
+function isWeatherQuery(message: string): boolean {
+  const weatherKeywords = [
+    'weather', 'temperature', 'forecast', 'rain', 'sunny', 'cloudy',
+    'météo', 'température', 'prévisions', 'pluie', 'ensoleillé', 'nuageux',
+    'អាកាសធាតុ', 'ភ្លៀង', 'ព្រះអាទិត្យ', 'ពពក'
+  ];
+  
+  const lowerMessage = message.toLowerCase();
+  return weatherKeywords.some(keyword => lowerMessage.includes(keyword));
+}
+
 export async function POST(request: Request) {
   const {
     id,
@@ -62,15 +74,20 @@ export async function POST(request: Request) {
 
   return createDataStreamResponse({
     execute: (dataStream) => {
-      // Handle Grok model by using fallback
-      let modelToUse = selectedChatModel;
-      if (selectedChatModel === 'chat-model-grok') {
+      // Check if the message is a weather query
+      const isWeatherRequest = isWeatherQuery(userMessage.content);
+      
+      // Always use Apsara (OpenAI) model for weather queries, regardless of selected model
+      let modelToUse = isWeatherRequest ? 'chat-model-small' : selectedChatModel;
+      
+      // Handle Grok model fallback only for non-weather queries
+      if (!isWeatherRequest && selectedChatModel === 'chat-model-grok') {
         modelToUse = getGrokFallbackModel(selectedChatModel);
         console.log(`Using fallback model ${modelToUse} for Grok`);
       }
 
       // Get the model-specific system prompt
-      const systemPromptForModel = getSystemPrompt(selectedChatModel);
+      const systemPromptForModel = getSystemPrompt(modelToUse);
 
       const result = streamText({
         model: myProvider.languageModel(modelToUse),
@@ -78,23 +95,20 @@ export async function POST(request: Request) {
         messages,
         maxSteps: 5,
         experimental_activeTools:
-          selectedChatModel === 'chat-model-reasoning'
-            ? []
-            : [
-                'getWeather',
-                'createDocument',
-                'updateDocument',
-                'requestSuggestions',
-              ],
+          isWeatherRequest || selectedChatModel !== 'chat-model-reasoning'
+            ? ['getWeather']
+            : [],
         experimental_transform: smoothStream({ chunking: 'word' }),
         experimental_generateMessageId: generateUUID,
         tools: {
           getWeather,
-          createDocument: createDocument({ session, dataStream }),
-          updateDocument: updateDocument({ session, dataStream }),
-          requestSuggestions: requestSuggestions({
-            session,
-            dataStream,
+          ...(isWeatherRequest ? {} : {
+            createDocument: createDocument({ session, dataStream }),
+            updateDocument: updateDocument({ session, dataStream }),
+            requestSuggestions: requestSuggestions({
+              session,
+              dataStream,
+            }),
           }),
         },
         onFinish: async ({ response, reasoning }) => {
