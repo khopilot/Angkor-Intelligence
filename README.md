@@ -1,63 +1,82 @@
-# AI Angkor Intelligence Chatbot
+# AI Chat Application Boilerplate
 
-<p align="center">
-  An advanced AI chatbot platform developed by AI Angkor Intelligence.
-</p>
+A modern, full-stack AI chat application built with Next.js 15, featuring authentication, database integration, and multiple AI provider support.
 
 ## Features
 
-- Advanced AI-powered conversational interface
-- Multiple language model support
-- File upload and processing capabilities
-- Secure authentication system
-- Chat history and data persistence
-- Modern, responsive user interface
-- Document creation and management tools
-- Weather information integration
+- 🤖 Multi-provider AI chat (OpenAI, X.AI, Fireworks)
+- 🔐 Secure authentication system
+- 💾 Persistent chat history
+- 🎨 Modern, responsive UI
+- 🌙 Dark theme optimized
+- 📱 Mobile-friendly design
 
-## Supported AI Models
+## Tech Stack
 
-This platform supports multiple AI models:
-- Small model for fast, lightweight tasks
-- Large model for complex, multi-step tasks
-- Reasoning model with advanced reasoning capabilities
-- Grok model integration (coming soon)
+- **Framework**: Next.js 15 with App Router
+- **Database**: PostgreSQL with Drizzle ORM
+- **Authentication**: NextAuth.js v5
+- **UI**: Tailwind CSS + Radix UI components
+- **AI**: Vercel AI SDK with multiple provider support
+- **Deployment**: Vercel
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18 or later
-- PostgreSQL database
-- OpenAI API key
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies:
+1. **Clone and install dependencies**
    ```bash
    pnpm install
    ```
-3. Set up environment variables in `.env.local`
-4. Start the development server:
+
+2. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Fill in your API keys and database URL.
+
+3. **Set up the database**
+   ```bash
+   pnpm db:generate
+   pnpm db:migrate
+   ```
+
+4. **Run the development server**
    ```bash
    pnpm dev
    ```
 
-## Usage
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-The AI Angkor Intelligence chatbot provides an intuitive interface for interacting with advanced AI models. Users can:
+## Environment Variables
 
-- Start new conversations
-- Upload and process files
-- Create and edit documents
-- Get real-time weather information
-- View and manage chat history
+Create a `.env.local` file with the following variables:
 
-## Security
+```env
+# Authentication secret
+AUTH_SECRET=your-auth-secret
 
-This application implements secure authentication and data storage practices to ensure user data remains protected.
+# AI Provider API Keys
+OPENAI_API_KEY=your-openai-key
+XAI_API_KEY=your-xai-key (optional)
+FIREWORKS_API_KEY=your-fireworks-key (optional)
 
-## Contact
+# Database
+DATABASE_URL=your-database-url
 
-For more information, please contact AI Angkor Intelligence at info@aiangkor.com.
+# Blob storage (for file uploads)
+BLOB_READ_WRITE_TOKEN=your-blob-token
+```
+
+## Development
+
+- **Linting**: `pnpm lint`
+- **Formatting**: `pnpm format`
+- **Database Studio**: `pnpm db:studio`
+- **Type Checking**: `pnpm build`
+
+## Deployment
+
+The application is configured for deployment on Vercel. Simply connect your repository to Vercel and set the environment variables in the dashboard.
+
+## License
+
+MIT License 
